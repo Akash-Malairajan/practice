@@ -13,20 +13,30 @@ const initialData = [
   { id: '8', title: 'Day 8 - Reinforcing your habits', image: require('./assets/day8.jpg'), completed: false },
 ];
 
+
+const getOpacity = (index) => {
+  const opacity = 1 - (index * 0.1); 
+  return opacity < 0.1 ? 0.1 : opacity; 
+};
+
+
 const getBackgroundColor = (index) => {
-  const colors = ['#3271a6', '#3982b8', '#4194cb', '#46a2da', '#58afdd', '#6abce2', '#8dcfec', '#b8e2f4'];
-  return colors[index] || '#b8e2f4';
+  const baseColor = '#3271a6';
+  const opacity = getOpacity(index);
+  const hexOpacity = Math.round(opacity * 255).toString(16).padStart(2, '0');
+  return `${baseColor}${hexOpacity}`;
 };
 
 const ListItem = ({ item, index, onPress }) => {
   const backgroundColor = getBackgroundColor(index);
+  const opacity = getOpacity(index); 
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
       <View style={styles.itemContent}>
         <View style={[styles.solidBackground, { backgroundColor }]}>
           <View style={styles.itemInnerContent}>
-            <Image source={item.image} style={styles.image} />
+            <Image source={item.image} style={[styles.image, { opacity }]} />
             <View style={styles.textContainer}>
               <Text style={styles.label}>Innergy</Text>
               <Text style={styles.title}>{item.title}</Text>
@@ -34,11 +44,11 @@ const ListItem = ({ item, index, onPress }) => {
             <View style={styles.iconContainer}>
               <View style={styles.iconBackground}>
                 {item.completed ? (
-                  <View style={styles.completedIcon}>
+                  <View style={[styles.completedIcon, { opacity }]}>
                     <Ionicons name="checkmark-circle" size={24} color="#ff8c00" />
                   </View>
                 ) : (
-                  <View style={styles.lockIcon}>
+                  <View style={[styles.lockIcon, { opacity }]}>
                     <Ionicons name="lock-closed-outline" size={18} color="grey" />
                   </View>
                 )}
