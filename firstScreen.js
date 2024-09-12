@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   itemContainer: {
-    marginBottom: 5,
+    marginBottom: 15,
   },
   solidBackground: {
     borderRadius: 15,
