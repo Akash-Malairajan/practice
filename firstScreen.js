@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
 
 const initialData = [
   { id: '1', title: 'Day 1 - Deciding what you want', image: require('./assets/day1.webp'), completed: false },
@@ -15,25 +14,21 @@ const initialData = [
 ];
 
 const getBackgroundColor = (index) => {
-  const colors = [ '#3271a6', '#3982b8', '#4194cb', '#46a2da', '#58afdd', '#6abce2', '#8dcfec', '#b8e2f4' ];
-  return colors[index] || '#b8e2f4'; 
+  const colors = ['#3271a6', '#3982b8', '#4194cb', '#46a2da', '#58afdd', '#6abce2', '#8dcfec', '#b8e2f4'];
+  return colors[index] || '#b8e2f4';
 };
 
-const ListItem = ({ item, index, toggleCompletion, isDisabled, isSelected, onPress }) => {
+const ListItem = ({ item, index, onPress }) => {
   const backgroundColor = getBackgroundColor(index);
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.itemContainer, isDisabled && styles.disabled]}
-      disabled={isDisabled}
-    >
+    <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
       <View style={styles.itemContent}>
         <View style={[styles.solidBackground, { backgroundColor }]}>
           <View style={styles.itemInnerContent}>
             <Image source={item.image} style={styles.image} />
             <View style={styles.textContainer}>
-              <Text style={styles.label}>Innergy</Text> 
+              <Text style={styles.label}>Innergy</Text>
               <Text style={styles.title}>{item.title}</Text>
             </View>
             <View style={styles.iconContainer}>
@@ -51,9 +46,6 @@ const ListItem = ({ item, index, toggleCompletion, isDisabled, isSelected, onPre
             </View>
           </View>
         </View>
-        {isDisabled && (
-          <BlurView style={styles.blurView} intensity={50} />
-        )}
       </View>
     </TouchableOpacity>
   );
@@ -63,7 +55,7 @@ export default function SecondPage() {
   const [data, setData] = useState(initialData);
   const [selectedId, setSelectedId] = useState(null);
 
-  const toggleCompletion = (id, index) => {
+  const toggleCompletion = (id) => {
     const updatedData = data.map((item) => {
       if (item.id === id) {
         return { ...item, completed: !item.completed };
@@ -75,12 +67,8 @@ export default function SecondPage() {
     setSelectedId(id);
   };
 
-  const onPressItem = (id, index) => {
-    if (!data[index].completed && (index === 0 || data[index - 1].completed)) {
-      toggleCompletion(id, index);
-    } else if (data[index].completed) {
-      toggleCompletion(id, index);
-    }
+  const onPressItem = (id) => {
+    toggleCompletion(id);
   };
 
   return (
@@ -96,10 +84,7 @@ export default function SecondPage() {
           <ListItem
             item={item}
             index={index}
-            toggleCompletion={() => toggleCompletion(item.id, index)}
-            isSelected={selectedId === item.id}
-            onPress={() => onPressItem(item.id, index)}
-            isDisabled={index > 0 && !data[index - 1].completed && !item.completed}
+            onPress={() => onPressItem(item.id)}
           />
         )}
         contentContainerStyle={styles.list}
@@ -149,22 +134,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: 'black', 
+    color: 'black',
   },
   title: {
     fontSize: 16,
     color: '#333',
-  },
-  disabled: {
-    opacity: 0.3,
-  },
-  blurView: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 50,
-    borderRadius: 15,
   },
   iconContainer: {
     width: 50,
@@ -209,6 +183,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 1,
   },
 });
