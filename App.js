@@ -59,7 +59,8 @@ function App() {
 
   const PlayPauseButton = () => (
     <TouchableOpacity onPress={togglePlayPause} style={styles.playPauseButton}>
-      <Ionicons name={isPlaying ? "pause" : "play"} size={15} color="white" />
+    <View><Ionicons name={isPlaying ? "pause" : "play"} size={15} color="white" /></View>
+      
     </TouchableOpacity>
   );
 
@@ -97,15 +98,8 @@ const styles = StyleSheet.create({
   continueContainer: { width: '100%', justifyContent: 'center', alignItems: 'center' },
   continueButton: { backgroundColor: '#FFA500', paddingVertical: 15, borderRadius: 25, alignItems: 'center', marginTop: 20, width: '85%' },
   continueButtonText: { color: 'black', fontWeight: 'bold', fontSize: 18 },
-  playPauseButton: {
-    backgroundColor: 'orange', 
-    width: 25, 
-    height: 25, 
-    borderRadius: 20, 
-    justifyContent: 'center', 
-    alignItems: 'center',
-    marginRight: 15,
-  },
+  playPauseButton: {backgroundColor: 'orange', width: 25, height: 25, borderRadius: 25, justifyContent: 'center', alignItems: 'center',marginRight: 15},
+  
 });
 
 export default App;
