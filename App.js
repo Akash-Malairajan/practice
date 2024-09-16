@@ -3,14 +3,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; 
-import FirstScreen from './firstScreen'; 
+import FirstScreen from './firstScreen';
+import SelfCareProgram from './secondScreen';
 
 const Stack = createStackNavigator();
 
-function ProgramDetailsScreen() {
-  const navigation = useNavigation(); 
-
+function ProgramDetailsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.programContainer}>
@@ -53,14 +51,16 @@ function ProgramDetailsScreen() {
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = (navigation) => {
     setIsPlaying(!isPlaying);
+    if (!isPlaying) {
+      navigation.navigate('SelfCareProgram'); 
+    }
   };
 
-  const PlayPauseButton = () => (
-    <TouchableOpacity onPress={togglePlayPause} style={styles.playPauseButton}>
-    <View><Ionicons name={isPlaying ? "pause" : "play"} size={15} color="white" /></View>
-      
+  const PlayPauseButton = ({ navigation }) => (
+    <TouchableOpacity onPress={() => togglePlayPause(navigation)} style={styles.playPauseButton}>
+      <Ionicons name={isPlaying ? "pause" : "play"} size={15} color="white" />
     </TouchableOpacity>
   );
 
@@ -75,10 +75,18 @@ function App() {
         <Stack.Screen 
           name="BeFutureReady" 
           component={FirstScreen} 
-          options={{ 
+          options={({ navigation }) => ({
             title: 'Be future ready',
-            headerRight: () => <PlayPauseButton />,
-          }} 
+            headerRight: () => <PlayPauseButton navigation={navigation} />, 
+          })} 
+        />
+        <Stack.Screen 
+          name="SelfCareProgram" 
+          component={SelfCareProgram} 
+          options={({ navigation }) => ({
+            title: 'SelfCareProgram',
+            headerRight: () => <PlayPauseButton navigation={navigation} />, 
+          })} 
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -98,8 +106,9 @@ const styles = StyleSheet.create({
   continueContainer: { width: '100%', justifyContent: 'center', alignItems: 'center' },
   continueButton: { backgroundColor: '#FFA500', paddingVertical: 15, borderRadius: 25, alignItems: 'center', marginTop: 20, width: '85%' },
   continueButtonText: { color: 'black', fontWeight: 'bold', fontSize: 18 },
-  playPauseButton: {backgroundColor: 'orange', width: 25, height: 25, borderRadius: 25, justifyContent: 'center', alignItems: 'center',marginRight: 15},
-  
+  playPauseButton: { backgroundColor: 'orange', width: 25, height: 25, borderRadius: 25, justifyContent: 'center', alignItems: 'center', marginRight: 15 },
 });
 
 export default App;
+
+

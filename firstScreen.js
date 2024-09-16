@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,12 +14,10 @@ const initialData = [
   { id: '8', title: 'Day 8 - Reinforcing your habits', image: require('./assets/day8.jpg'), completed: false },
 ];
 
-
 const getOpacity = (index) => {
   const opacity = 1 - (index * 0.1); 
   return opacity < 0.1 ? 0.1 : opacity; 
 };
-
 
 const getBackgroundColor = (index) => {
   const baseColor = '#3271a6';
@@ -61,7 +60,7 @@ const ListItem = ({ item, index, onPress }) => {
   );
 };
 
-export default function SecondPage() {
+export default function FirstScreen({ navigation }) {
   const [data, setData] = useState(initialData);
   const [selectedId, setSelectedId] = useState(null);
 
