@@ -3,15 +3,16 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+
 const initialData = [
-  { id: '1', title: 'Day 1 - Deciding what you want', image: require('./assets/day1.webp'), completed: false },
-  { id: '2', title: 'Day 2 - Transforming actions into habits', image: require('./assets/day2.jpg'), completed: false },
-  { id: '3', title: 'Day 3 - Transforming actions into habits', image: require('./assets/day3.jpeg'), completed: false },
-  { id: '4', title: 'Day 4 - Distraction: The actual reward', image: require('./assets/day4.jpg'), completed: false },
-  { id: '5', title: 'Day 5 - Clear the chaos', image: require('./assets/day5.jpg'), completed: false },
-  { id: '6', title: 'Day 6 - Bouncing back from setbacks', image: require('./assets/day6.jpeg'), completed: false },
-  { id: '7', title: 'Day 7 - Finding your inner friend', image: require('./assets/day7.jpg'), completed: false },
-  { id: '8', title: 'Day 8 - Reinforcing your habits', image: require('./assets/day8.jpg'), completed: false },
+  { id: '1', title: 'Day 1 - Deciding what you want', image: require('../assets/day1.webp'), completed: false },
+  { id: '2', title: 'Day 2 - Transforming actions into habits', image: require('../assets/day2.jpg'), completed: false },
+  { id: '3', title: 'Day 3 - Transforming actions into habits', image: require('../assets/day3.jpeg'), completed: false },
+  { id: '4', title: 'Day 4 - Distraction: The actual reward', image: require('../assets/day4.jpg'), completed: false },
+  { id: '5', title: 'Day 5 - Clear the chaos', image: require('../assets/day5.jpg'), completed: false },
+  { id: '6', title: 'Day 6 - Bouncing back from setbacks', image: require('../assets/day6.jpeg'), completed: false },
+  { id: '7', title: 'Day 7 - Finding your inner friend', image: require('../assets/day7.jpg'), completed: false },
+  { id: '8', title: 'Day 8 - Reinforcing your habits', image: require('../assets/day8.jpg'), completed: false },
 ];
 
 const getOpacity = (index) => {
@@ -60,7 +61,7 @@ const ListItem = ({ item, index, onPress }) => {
   );
 };
 
-export default function FirstScreen({ navigation }) {
+export default function Activities({ navigation }) {
   const [data, setData] = useState(initialData);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -195,3 +196,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
 });
+
+
+
+

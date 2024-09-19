@@ -1,9 +1,9 @@
-
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-paper';
 
-const SecondScreen = () => {
+
+const SelfCareProgram = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Select a daily self-care program</Text>
@@ -12,7 +12,7 @@ const SecondScreen = () => {
       <View style={styles.cardContainer}>
         <View style={styles.cardWrapper}>
           <Card style={styles.card}>
-            <Card.Cover source={require('./assets/image1.jpg')} style={styles.image} />
+            <Card.Cover source={require('../assets/image1.jpg')} style={styles.image} />
           </Card>
           <Text style={styles.cardTitle}>Innergy</Text>
           <Text style={styles.cardSubtitle}>Try to complete reading 1 page today and highlight</Text>
@@ -20,7 +20,7 @@ const SecondScreen = () => {
         
         <View style={styles.cardWrapper}>
           <Card style={styles.card}>
-            <Card.Cover source={require('./assets/image2.webp')} style={styles.imagess} />
+            <Card.Cover source={require('../assets/image2.webp')} style={styles.imagess} />
           </Card>
           <Text style={styles.cardTitle}>Time management</Text>
           <Text style={styles.cardSubtitle}>Try to complete reading 1 page today and highlight</Text>
@@ -28,7 +28,7 @@ const SecondScreen = () => {
         
         <View style={styles.cardWrapper}>
           <Card style={styles.card}>
-            <Card.Cover source={require('./assets/image3.webp')} style={styles.image} />
+            <Card.Cover source={require('../assets/image3.webp')} style={styles.image} />
           </Card>
           <Text style={styles.cardTitle}>Confidence</Text>
           <Text style={styles.cardSubtitle}>Try to complete reading 1 page today and highlight</Text>
@@ -90,4 +90,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SecondScreen;
+export default SelfCareProgram;
+
