@@ -1,32 +1,26 @@
-
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, Pressable } from 'react-native';
 import { Card } from 'react-native-paper';
 
 const SelfCareProgram = () => {
-  const [showPopup, setShowPopup] = useState(false); 
+  const [showPopup, setShowPopup] = useState(false);
   const [selectedCard, setSelectedCard] = useState('');
 
-  
   const handleCardPress = (programName) => {
     if (programName === 'Innergy') {
-  
       setShowPopup(false);
     } else {
-      
       setSelectedCard(programName);
       setShowPopup(true);
     }
   };
 
   return (
-    <View style={[styles.container , showPopup && { opacity: 0.1 }]}>
+    <View style={styles.container}>
       <Text style={styles.title}>Select a daily self-care program</Text>
       <Text style={styles.subtitle}>Try to complete reading 1 page today and highlight</Text>
 
-      
-      <View style={[styles.cardContainer, showPopup && { opacity: 0.1 }]}>
-      
+      <View style={styles.cardContainer}>
         <View style={styles.cardWrapper}>
           <Pressable onPress={() => handleCardPress('Innergy')}>
             <Card style={styles.card}>
@@ -37,7 +31,6 @@ const SelfCareProgram = () => {
           </Pressable>
         </View>
 
-      
         <View style={styles.cardWrapper}>
           <Pressable onPress={() => handleCardPress('Time management')}>
             <Card style={styles.card}>
@@ -48,7 +41,6 @@ const SelfCareProgram = () => {
           </Pressable>
         </View>
 
-        
         <View style={styles.cardWrapper}>
           <Pressable onPress={() => handleCardPress('Confidence')}>
             <Card style={styles.card}>
@@ -60,12 +52,11 @@ const SelfCareProgram = () => {
         </View>
       </View>
 
-    
       <Modal
         visible={showPopup}
         transparent={true}
         animationType="fade"
-        onRequestClose={() => setShowPopup(false)} 
+        onRequestClose={() => setShowPopup(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.popup}>
@@ -74,7 +65,7 @@ const SelfCareProgram = () => {
             </Text>
             <Pressable
               style={styles.popupButton}
-              onPress={() => setShowPopup(false)} 
+              onPress={() => setShowPopup(false)}
             >
               <Text style={styles.popupButtonText}>Okay</Text>
             </Pressable>
@@ -115,7 +106,6 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 120,
-
   },
   cardTitle: {
     fontSize: 16,
@@ -138,12 +128,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   popup: {
-    width: '90%', 
+    width: '90%',
     backgroundColor: '#fff',
-    padding: 20, 
+    padding: 20,
     borderRadius: 15,
     alignItems: 'center',
   },
@@ -153,20 +143,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   popupButton: {
-    backgroundColor: '#FF9C47', 
+    backgroundColor: '#FF9C47',
     paddingHorizontal: 40,
     paddingVertical: 10,
-    borderRadius: 25, 
-    alignItems:'center',
-    justifyContent:'center',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   popupButtonText: {
     color: '#fff',
     fontSize: 16,
-    width:230,
-    paddingStart:90,
-   
+    width: 230,
+    paddingStart: 90,
   },
 });
 
 export default SelfCareProgram;
+
+
